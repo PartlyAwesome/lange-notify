@@ -28,7 +28,7 @@
   "nodecg": {
     "compatibleRange": "~0.8.0",
     "bundleDependencies": {
-      "lfg-nucleus": "^2.0.0"
+      "lfg-nucleus": ">=2 <=3"
     },
     "graphics": [
       {
