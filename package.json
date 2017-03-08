@@ -63,9 +63,7 @@
   "repository": "https://lange@github.com/Lange/lange-notify.git",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^6.0.5",
-    "eslint": "^2.13.1",
-    "eslint-config-xo": "^0.15.2",
-    "eslint-plugin-babel": "^3.3.0"
+    "eslint": "^3.17.1",
+    "eslint-config-xo": "^0.17.0"
   }
 }

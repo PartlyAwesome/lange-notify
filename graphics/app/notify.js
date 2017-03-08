@@ -3,6 +3,8 @@
 
 	// Permanent GSAP timeline
 	const tl = new TimelineLite({autoRemoveChildren: true});
+	const label = window.label;
+	const bgs = window.bgs;
 
 	// Dope constants.
 	const DELAY_INCREMENT = 0.09;
@@ -45,8 +47,8 @@
 		opts = opts || {};
 		opts.colors = opts.colors || SUB_COLORS;
 
-		const reverseBgs = window.bgs.slice(0).reverse();
-		const foremostBg = window.bgs[0];
+		const reverseBgs = bgs.slice(0).reverse();
+		const foremostBg = bgs[0];
 		let delay = 0;
 
 		// Animate in

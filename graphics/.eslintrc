@@ -8,8 +8,6 @@
 		"TimelineLite": true,
 		"Elastic": true,
 		"Back": true,
-		"Power2": true,
-		"label": true,
-		"bgs": true
+		"Power2": true
 	}
 }

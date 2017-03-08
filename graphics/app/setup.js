@@ -1,10 +1,6 @@
 /* eslint-disable no-var */
-var stage;
-var label;
-var bg1;
-var bg2;
-var bg3;
 var bgs;
+var label;
 /* eslint-enable no-var */
 
 (function () {
@@ -27,7 +23,7 @@ var bgs;
 	const maxY = stageEl.height;
 
 	// Create the stage on the target canvas, and create a ticker that will render at 60 fps.
-	stage = new createjs.Stage('notification');
+	const stage = new createjs.Stage('notification');
 	createjs.Ticker.addEventListener('tick', event => {
 		if (event.paused) {
 			return;
@@ -60,21 +56,21 @@ var bgs;
 	stage.addChild(bgContainer);
 
 	// Create the three background elements
-	bg3 = new createjs.Shape();
+	const bg3 = new createjs.Shape();
 	bg3.name = 'bg3';
 	bg3.maxWidth = maxX;
 	bg3.width = 0;
 	bg3.x = midX;
 	bgContainer.addChild(bg3);
 
-	bg2 = new createjs.Shape();
+	const bg2 = new createjs.Shape();
 	bg2.name = 'bg2';
 	bg2.maxWidth = maxX - 23;
 	bg2.width = 0;
 	bg2.x = midX;
 	bgContainer.addChild(bg2);
 
-	bg1 = new createjs.Shape();
+	const bg1 = new createjs.Shape();
 	bg1.name = 'bg1';
 	bg1.maxWidth = maxX - 54;
 	bg1.width = 0;
