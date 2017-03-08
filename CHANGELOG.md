@@ -1,3 +1,13 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/Lange/lange-notify/compare/v2.0.0...v2.1.0) (2017-03-08)
+
+
+### Features
+
+* add support for lfg-nucleus v3.x.x ([06c579d](https://github.com/Lange/lange-notify/commit/06c579d))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/Lange/lange-notify/compare/v1.0.0...v2.0.0) (2016-06-23)
 
