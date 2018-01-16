@@ -41,6 +41,14 @@
 		});
 	});
 
+	nodecg.listenFor('cheer', 'lfg-nucleus', cheer => {
+		// Got a cheer from Twitch
+		notify(`${cheer.formattedAmount} BITS`, truncateTo25(cheer.name), {
+			colors: TIP_COLORS,
+			inSound: 'tip'
+		});
+	});
+
 	function notify(firstMsg, secondMsg, opts) {
 		firstMsg = firstMsg.toUpperCase();
 		secondMsg = secondMsg.toUpperCase();
