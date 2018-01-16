@@ -1,3 +1,19 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/Lange/lange-notify/compare/v2.1.0...v3.0.0) (2018-01-16)
+
+
+### Features
+
+* add support for cheers ([7734aea](https://github.com/Lange/lange-notify/commit/7734aea))
+* port to NodeCG v0.9 ([15b579a](https://github.com/Lange/lange-notify/commit/15b579a))
+
+
+### BREAKING CHANGES
+
+* No longer supports versions of NodeCG earlier than v0.9.0.
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/Lange/lange-notify/compare/v2.0.0...v2.1.0) (2017-03-08)
 

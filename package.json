@@ -1,6 +1,6 @@
 {
   "name": "lange-notify",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Lange's notification bundle.",
   "homepage": "http://twitch.tv/langeh",
   "scripts": {
@@ -28,7 +28,7 @@
   "nodecg": {
     "compatibleRange": "~0.9.0",
     "bundleDependencies": {
-      "lfg-nucleus": ">=2 <=3"
+      "lfg-nucleus": "^4.0.0"
     },
     "graphics": [
       {
