@@ -1,4 +1,4 @@
-#lange-notify [![Build Status](https://travis-ci.org/Lange/lange-notify.svg?branch=master)](https://travis-ci.org/Lange/lange-notify)
+# lange-notify [![Build Status](https://travis-ci.org/Lange/lange-notify.svg?branch=master)](https://travis-ci.org/Lange/lange-notify)
 This is a [NodeCG](http://github.com/nodecg/nodecg) bundle.
 
 This is the notification graphic that I use on [my stream](http://twitch.tv/langeh).
