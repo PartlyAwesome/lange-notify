@@ -63,5 +63,4 @@ Keep this command prompt open after NodeCG has been installed.
 - Sound design by [Anthony "Airon" Oetzmann](http://aironaudio.weebly.com/) 
 
 ### License
-lange-notify is provided under the MIT license, which is available to read in the [LICENSE][] file.
-[license]: LICENSE
+lange-notify is provided under the MIT license, which is available to read in the [LICENSE](LICENSE) file.
