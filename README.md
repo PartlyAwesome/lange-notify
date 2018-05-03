@@ -34,8 +34,8 @@ Keep this command prompt open after NodeCG has been installed.
 3. Install lange-notify and the bundles that it depends on.
 	```sh
 	nodecg install lange/lange-notify
-	nodecg install "supportclass/lfg-filter#^3.0.0"
-	nodecg install "supportclass/lfg-nucleus#^3.0.0"
+	nodecg install "supportclass/lfg-filter#^4.0.0"
+	nodecg install "supportclass/lfg-nucleus#^4.0.0"
 	```
 
 4. To listen for subscriptions and resubs, install and configure one of the following:
