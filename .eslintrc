@@ -1,13 +1,3 @@
 {
-	"extends": "xo/esnext",
-	"rules": {
-		"new-cap": [
-			2,
-			{
-				"capIsNewExceptions": [
-					"nodecg.Replicant"
-				]
-			}
-		]
-	}
+	"extends": "standard"
 }
