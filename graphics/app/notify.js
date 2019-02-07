@@ -23,7 +23,7 @@
 
   nodecg.listenFor('twitch-subscription', 'nodecg-streamlabs', data => {
     let firstMsg = 'NEW SUBSCRIBER'
-    if (data.months) {
+    if (data.months && data.months !== 1) {
       firstMsg = `RESUB × ${data.months}`
     }
 
