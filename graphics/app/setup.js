@@ -94,6 +94,7 @@ var maxX // eslint-disable-line no-unused-vars
   bg1.xL = midX
   stage.addChild(bg1)
 
+  // Create a mask that will duplicate bg1 for text masking
   const bgM = new Graphics()
   bgM.name = 'bgM'
   stage.addChild(bgM)
