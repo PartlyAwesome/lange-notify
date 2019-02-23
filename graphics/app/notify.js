@@ -1,27 +1,44 @@
 (function () {
   'use strict'
 
+  const pixi = PIXI // eslint-disable-line no-undef
+  const Style = pixi.TextStyle
+
   // Permanent GSAP timeline
   const tl = new TimelineLite({ autoRemoveChildren: true })
   const label = window.label
   const bgs = window.bgs
+  const maxX = window.maxX
 
   // Dope constants.
   const DELAY_INCREMENT = 0.09
   const SUB_COLORS = [
-    '#e87933',
-    '#f6ce14',
-    '#6bba82'
+    0xe87933,
+    0xf6ce14,
+    0x6bba82
   ]
   const TIP_COLORS = [
-    '#6bba82',
-    '#e87933',
-    '#f6ce14'
+    0x6bba82,
+    0xe87933,
+    0xf6ce14
   ]
-  const FIRST_MSG_FONT = '800 65px proxima-nova'
-  const SECOND_MSG_FONT = '800 65px proxima-nova'
+  const FIRST_MSG_STYLE = new Style({
+    fontFamily: 'proxima-nova',
+    fontWeight: 800,
+    fontSize: 65,
+    fill: 0xF7F2E8,
+    align: 'center'
+  })
+  const SECOND_MSG_STYLE = new Style({
+    fontFamily: 'proxima-nova',
+    fontWeight: 800,
+    fontSize: 65,
+    fill: 0xF7F2E8,
+    align: 'center'
+  })
 
   nodecg.listenFor('twitch-subscription', 'nodecg-streamlabs', data => {
+    // Got a subscription on Twitch
     let firstMsg = 'NEW SUBSCRIBER'
     if (data.months && data.months !== 1) {
       firstMsg = `RESUB × ${data.months}`
@@ -34,7 +51,7 @@
   })
 
   nodecg.listenFor('donation', 'nodecg-streamlabs', tip => {
-    // Got a tip from StreamTip
+    // Got a donation on StreamLabs
     notify(`${tip.formatted_amount} TIP`, truncateTo25(tip.name), {
       colors: TIP_COLORS,
       inSound: 'tip'
@@ -42,10 +59,18 @@
   })
 
   nodecg.listenFor('twitch-bits', 'nodecg-streamlabs', cheer => {
-    // Got a cheer from Twitch
+    // Got a cheer on Twitch
     notify(`${cheer.amount} BITS`, truncateTo25(cheer.name), {
       colors: TIP_COLORS,
       inSound: 'tip'
+    })
+  })
+
+  nodecg.listenFor('twitch-follow', 'nodecg-streamlabs', follow => {
+    // Got a follow on Twitch
+    notify(`NEW FOLLOW`, follow.name, {
+      colors: SUB_COLORS,
+      inSound: 'sub'
     })
   })
 
@@ -57,74 +82,69 @@
 
     const reverseBgs = bgs.slice(0).reverse()
     const foremostBg = bgs[0]
-    let delay = 0
 
     // Animate in
     tl.add('npIn')
 
     tl.call(() => {
-      const len = bgs.length
-      for (let i = 0; i < len; i++) {
-        bgs[i].color = opts.colors[i]
+      for (let i = 0; i < bgs.length; i++) {
+        bgs[i].c = opts.colors[i]
       }
       nodecg.playSound(opts.inSound)
     }, null, null, 'npIn')
 
-    reverseBgs.forEach(bg => {
-      tl.to(bg, 0.75, {
-        width: bg.maxWidth,
-        ease: Elastic.easeOut.config(0.3, 0.4)
-      }, `npIn+=${delay}`)
-      delay += DELAY_INCREMENT
-    })
+    tl.staggerTo(reverseBgs, 0.75, {
+      w: (i, t) => {
+        return maxX - t.xIn
+      },
+      ease: Elastic.easeOut.config(0.3, 0.4)
+    }, DELAY_INCREMENT, `npIn`)
 
     tl.to(label, 0.6, {
       onStart () {
-        label.font = FIRST_MSG_FONT
+        label.style = FIRST_MSG_STYLE
         label.text = firstMsg
+        fixWidth(label)
       },
       y: label.showY,
-      ease: Back.easeOut.config(4),
-      autoRound: false
-    }, `npIn+=${delay - DELAY_INCREMENT}`)
+      ease: Back.easeOut.config(4)
+    }, `npIn+=${DELAY_INCREMENT * bgs.length}`)
 
     // Show second message
     tl.to(foremostBg, 0.6, {
       onStart () {
         nodecg.playSound('cut')
       },
-      width: 0,
+      w: 0,
       ease: Elastic.easeIn.config(0.3, 0.4),
       onComplete () {
-        label.font = SECOND_MSG_FONT
+        label.style = SECOND_MSG_STYLE
         label.text = secondMsg
+        fixWidth(label)
       }
     }, '+=1.5')
 
     tl.to(foremostBg, 0.6, {
-      width: foremostBg.maxWidth,
+      w: maxX - foremostBg.xIn,
       ease: Elastic.easeOut.config(0.3, 0.4)
     }, '+=0.01')
 
     // Animate out
-    delay = 0
-
     tl.add('npOut', '+=4')
+
     tl.call(() => {
       nodecg.playSound('out')
     }, null, null, 'npOut')
-    bgs.forEach(bg => {
-      tl.to(bg, 0.7, {
-        width: 0,
-        ease: Elastic.easeIn.config(0.3, 0.4)
-      }, `npOut+=${delay}`)
-      delay += DELAY_INCREMENT
-    })
+
+    tl.staggerTo(bgs, 0.7, {
+      w: 0,
+      ease: Elastic.easeIn.config(0.3, 0.4)
+    }, DELAY_INCREMENT, `npOut`)
 
     tl.to(label, 0.467, {
       y: label.hideY,
       ease: Power2.easeIn
-    }, `npOut+=${delay}`)
+    }, `npOut+=${DELAY_INCREMENT * bgs.length}`)
 
     // Kill time between successive notifications
     tl.to({}, 1, {})
@@ -139,5 +159,17 @@
     }
 
     return text
+  }
+
+  function resetWidth (thing) {
+    thing._width = undefined
+    thing.scale.set(1)
+  }
+
+  function fixWidth (thing) {
+    resetWidth(thing)
+    if (thing.width > thing.maxWidth) {
+      thing.width = thing.maxWidth
+    }
   }
 })()
